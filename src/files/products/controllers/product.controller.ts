@@ -42,6 +42,7 @@ const updateProduct = async (
   const [error, data] = await manageAsyncOps(
     ProductService.updateProduct({
       productId: req.params.productId,
+      sellerId: res.locals.jwt.id,
       update: req.body,
     })
   )
@@ -61,6 +62,7 @@ const deleteProduct = async (
   const [error, data] = await manageAsyncOps(
     ProductService.deleteProduct({
       productId: req.params.productId,
+      sellerId: res.locals.jwt.id,
     })
   )
 

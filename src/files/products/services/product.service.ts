@@ -32,12 +32,16 @@ export default class ProductService {
 
   static async updateProduct(payload: {
     productId: any
+    sellerId: any
     update: Partial<IProduct>
   }): Promise<IResponse> {
-    const { productId, update } = payload
-    let product = await productRepository.findOne({ id: productId }, ["id"])
+    const { productId, sellerId, update } = payload
+    let product = await productRepository.findOne({ id: productId, sellerId }, [
+      "id",
+    ])
 
     if (!product) return { success: false, msg: productFailure.FETCHED }
+
     const [updateCount] = await productRepository.update(
       { id: productId },
       update
@@ -47,11 +51,15 @@ export default class ProductService {
     return { success: true, msg: productSuccess.UPDATED }
   }
 
-  static async deleteProduct(payload: { productId: any }): Promise<IResponse> {
-    const { productId } = payload
+  static async deleteProduct(payload: {
+    productId: any
+    sellerId: any
+  }): Promise<IResponse> {
+    const { productId, sellerId } = payload
     console.log("productId", productId)
     const deleteProduct = await productRepository.deleteProduct({
       id: productId,
+      sellerId,
     })
 
     if (deleteProduct < 1)

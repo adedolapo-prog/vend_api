@@ -11,11 +11,11 @@ export default class ProductRepository implements IProductRepo {
   }
 
   async findOne(
-    productId: Pick<IProduct, "id">,
+    productQuery: Partial<IProduct>,
     attributes: Partial<keyof IProduct>[]
   ) {
     const product = await Product.findOne({
-      where: productId,
+      where: productQuery,
       attributes: [...attributes],
     })
 
@@ -27,7 +27,7 @@ export default class ProductRepository implements IProductRepo {
     return Product.update(update, { where: productId })
   }
 
-  async deleteProduct(productId: Pick<IProduct, "id">) {
-    return Product.destroy({ where: productId })
+  async deleteProduct(productQuery: Partial<IProduct>) {
+    return Product.destroy({ where: productQuery })
   }
 }
