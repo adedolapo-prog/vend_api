@@ -33,13 +33,13 @@ export default class Product extends Model<IProduct> {
   @Column
   declare amountAvailable: number
 
-  @Default("0.00")
-  @Column(DataType.DECIMAL)
+  @Default(0)
+  @Column(DataType.BIGINT)
   declare cost: number
 
   @ForeignKey(() => User)
   @Column(DataType.UUID)
-  userId: any
+  sellerId: any
 
   @BelongsTo(() => User)
   user: User

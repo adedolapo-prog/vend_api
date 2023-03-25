@@ -1,8 +1,9 @@
-import { NextFunction, Response } from "express"
+import { NextFunction, Response, Request } from "express"
 import config from "../core/config"
 import { verify, sign } from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import { IUser } from "../files/users/user.dto"
+import { CustomError } from "./error"
 
 export interface UtilResponse {
   success: boolean
@@ -98,6 +99,24 @@ const verifyWhoAmI = (user: IToken, query: { [key: string]: any }): boolean => {
   return true
 }
 
+const restrictTo = (...roles: any) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!roles.includes(res.locals.jwt.role)) {
+        return res.status(401).json({
+          message: "You do not have permission to perform this action",
+        })
+      }
+
+      next()
+    } catch (error) {
+      return res.status(500).json({
+        message: "Something went wrong",
+      })
+    }
+  }
+}
+
 export {
   tokenHandler,
   isAuthenticated,
@@ -105,4 +124,5 @@ export {
   verifyPassword,
   manageAsyncOps,
   verifyWhoAmI,
+  restrictTo,
 }

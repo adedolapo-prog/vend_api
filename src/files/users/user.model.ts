@@ -34,8 +34,8 @@ export default class User extends Model<IUser> {
   @Column
   declare userName: string
 
-  @Default("0.00")
-  @Column(DataType.DECIMAL)
+  @Default(0)
+  @Column(DataType.BIGINT)
   declare deposit: number
 
   @Column
