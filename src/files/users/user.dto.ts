@@ -12,6 +12,8 @@ export interface IUser {
 
 export interface IUserRepo {
   createUser: (payload: IUser) => Promise<User>
-  // fetchMultipleUsers: (payload: Partial<IUser>) => Promise<IUser[]>
-  // fetchSingleUser: (payload: Partial<IUser>) => Promise<IUser>
+  fetchSingleUser: (
+    payload: Partial<IUser>,
+    attributes: Partial<keyof IUser>[]
+  ) => Promise<IUser>
 }

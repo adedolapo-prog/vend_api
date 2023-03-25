@@ -10,9 +10,3 @@ export interface IPagination {
   sort: string
   $or?: any
 }
-
-export interface IResponse {
-  success: boolean
-  msg: string
-  data?: Record<any, any>
-}

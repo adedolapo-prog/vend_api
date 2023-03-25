@@ -1,7 +1,7 @@
 import { ErrorRequestHandler, Response, Request } from "express"
-import { IResponse } from "../constants"
 import { CustomError, DuplicateError } from "../utils/error"
 import { generalMessages } from "./messages"
+import { IResponse } from "./response.dto"
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const handleApplicationErrors: ErrorRequestHandler = (
