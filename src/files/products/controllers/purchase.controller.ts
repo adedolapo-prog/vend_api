@@ -20,7 +20,7 @@ const purchaseProduct = async (
 
   if (!data?.success) return next(new CustomError(data!.msg, 400, data!))
 
-  return responseHandler(res, 200, data!)
+  return responseHandler(res, 201, data!)
 }
 
 export default { purchaseProduct }

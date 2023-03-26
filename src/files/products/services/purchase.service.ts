@@ -1,5 +1,8 @@
 import { IResponse } from "../../../core/response.dto"
-import { purchaseFailure } from "../../purchases/purchase.messages"
+import {
+  purchaseFailure,
+  purchaseSuccess,
+} from "../../purchases/purchase.messages"
 import UserRepository from "../../users/user.repository"
 import ProductRepository from "../product.repository"
 
@@ -40,7 +43,7 @@ export default class PurchaseProductService {
 
     return {
       success: true,
-      msg: "",
+      msg: purchaseSuccess.CREATED,
       data: {
         ...productDetails,
         totalAmount,

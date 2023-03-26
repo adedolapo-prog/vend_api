@@ -11,7 +11,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
 
   if (!data?.success) return next(new CustomError(data!.msg, 400, data!))
 
-  return responseHandler(res, 200, data!)
+  return responseHandler(res, 201, data!)
 }
 
 const loginUser = async (req: Request, res: Response, next: NextFunction) => {

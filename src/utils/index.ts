@@ -125,4 +125,5 @@ export {
   manageAsyncOps,
   verifyWhoAmI,
   restrictTo,
+  AlphaNumeric,
 }

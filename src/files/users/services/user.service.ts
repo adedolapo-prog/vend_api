@@ -37,8 +37,6 @@ export default class UserService {
       { deposit: amount }
     )
 
-    console.log("[creditwallet]", creditWallet)
-
     return { success: true, msg: userSuccess.DEPOSIT }
   }
 }
