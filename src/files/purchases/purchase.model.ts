@@ -5,47 +5,46 @@ import {
   Default,
   DefaultScope,
   ForeignKey,
-  HasMany,
   Model,
   PrimaryKey,
-  Scopes,
   Table,
 } from "sequelize-typescript"
-import Purchase from "../purchases/purchase.model"
+import Product from "../products/product.model"
 import User from "../users/user.model"
-import { IProduct } from "./product.dto"
+import { IPurchase } from "./purchase.dto"
 
 @Table({
   timestamps: true,
-  tableName: "products",
+  tableName: "purchases",
   paranoid: true,
 })
 @DefaultScope(() => ({
   attributes: { exclude: ["createdAt", "updatedAt"] },
 }))
-export default class Product extends Model<IProduct> {
+export default class Purchase extends Model<IPurchase> {
   @PrimaryKey
   @Default(DataType.UUIDV4)
   @Column(DataType.UUID)
   declare id: string
 
   @Column
-  declare productName: string
-
-  @Column
-  declare amountAvailable: number
+  declare change: number
 
   @Default(0)
   @Column(DataType.BIGINT)
-  declare cost: number
+  declare amount: number
+
+  @ForeignKey(() => Product)
+  @Column(DataType.UUID)
+  productId: any
+
+  @BelongsTo(() => Product)
+  product: Product
 
   @ForeignKey(() => User)
   @Column(DataType.UUID)
-  sellerId: any
+  buyerId: any
 
   @BelongsTo(() => User)
-  user: User
-
-  @HasMany(() => Purchase)
-  purchases: Purchase[]
+  buyer: User
 }

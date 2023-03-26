@@ -56,7 +56,6 @@ export default class ProductService {
     sellerId: any
   }): Promise<IResponse> {
     const { productId, sellerId } = payload
-    console.log("productId", productId)
     const deleteProduct = await productRepository.deleteProduct({
       id: productId,
       sellerId,

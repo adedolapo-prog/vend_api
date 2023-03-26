@@ -10,6 +10,7 @@ import {
   Table,
 } from "sequelize-typescript"
 import Product from "../products/product.model"
+import Purchase from "../purchases/purchase.model"
 import { BASE_ROLES, IUser } from "./user.dto"
 
 @Table({
@@ -46,4 +47,7 @@ export default class User extends Model<IUser> {
 
   @HasMany(() => Product)
   products: Product[]
+
+  @HasMany(() => Purchase)
+  purchases: Purchase[]
 }

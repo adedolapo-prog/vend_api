@@ -6,7 +6,7 @@ export const productSuccess = {
 }
 
 export const productFailure = {
-  CREATED: "Unable to create created",
+  CREATED: "Unable to create product",
   FETCHED: "Products not found",
   UPDATED: "Product not updated",
   DELETED: "Product not deleted",
