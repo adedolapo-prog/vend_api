@@ -37,7 +37,6 @@ export default class AuthService {
   static async loginUser(payload: Partial<IUser>): Promise<IResponse> {
     const { userName, password } = payload
 
-    console.log(" here")
     const user = await userRepository.fetchSingleUser({ userName }, [
       "id",
       "password",
@@ -47,12 +46,10 @@ export default class AuthService {
 
     if (!user) return { success: false, msg: userFailure.INVALID_CREDENTIALS }
 
-    console.log("user", user)
     const validatePassword = await verifyPassword(password, user.password)
     if (!validatePassword)
       return { success: false, msg: userFailure.INVALID_CREDENTIALS }
 
-    console.log("validatePassword", validatePassword)
     return {
       success: true,
       msg: userSuccess.LOGIN,

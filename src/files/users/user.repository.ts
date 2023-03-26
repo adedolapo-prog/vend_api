@@ -18,4 +18,12 @@ export default class UserRepository implements IUserRepo {
     if (!user) return null
     return user.toJSON()
   }
+
+  async update(userId: Pick<IUser, "id">, update: Partial<IUser>) {
+    return User.update(update, { where: userId })
+  }
+
+  async increment(userId: Pick<IUser, "id">, update: { deposit: number }) {
+    return User.increment(update, { where: userId })
+  }
 }

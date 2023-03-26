@@ -12,8 +12,19 @@ export interface IUser {
 
 export interface IUserRepo {
   createUser: (payload: IUser) => Promise<User>
+
   fetchSingleUser: (
     payload: Partial<IUser>,
     attributes: Partial<keyof IUser>[]
   ) => Promise<IUser>
+
+  update: (
+    userId: Pick<IUser, "id">,
+    update: Partial<IUser>
+  ) => Promise<[affectedCount: number]>
+
+  increment: (
+    userId: Pick<IUser, "id">,
+    update: { deposit: number }
+  ) => Promise<[affectedRows: User[], affectedCount?: number]>
 }
